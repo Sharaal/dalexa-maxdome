@@ -1,0 +1,17 @@
+{
+  "intents": [
+    {
+      "intent": "newAssets",
+      "slots": []
+    },
+    {
+      "intent": "newAssetsByGenre",
+      "slots": [
+        {
+          "name": "genre",
+          "type": "GENRE"
+        }
+      ]
+    }
+  ]
+}
