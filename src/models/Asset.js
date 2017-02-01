@@ -1,9 +1,10 @@
 class Asset {
   constructor(data) {
+    this.id = data.id;
     this.data = data;
   }
 
-  render(response) {
+  getSay(opts) {
     const asset = this.data;
 
     let say;
@@ -20,8 +21,15 @@ class Asset {
       say += ` - Folge ${asset.episodeTitle}`;
     }
     say += `, Genre: ${asset.genres.join(', ')}`;
+    if (opts.description) {
+      say += `. ${asset.description}`;
+    }
 
-    response.say(say);
+    return say;
+  }
+
+  getDisplay() {
+    const asset = this.data;
 
     let title = asset.title;
     if (asset.seasonNumber) {
@@ -31,15 +39,14 @@ class Asset {
       title += ` - Folge ${asset.episodeTitle}`;
     }
 
-    response.display({
-      title: title,
-      text: [
-        `${asset.productionYear}, ${asset.duration} Minuten`,
-        `Genres: ${asset.genres.join(', ')}`,
-        '',
-        asset.description,
-      ].join('\n'),
-    });
+    const text = [
+      `${asset.productionYear}, ${asset.duration} Minuten`,
+      `Genres: ${asset.genres.join(', ')}`,
+      '',
+      asset.description,
+    ].join('\n');
+
+    return { title, text };
   }
 }
 

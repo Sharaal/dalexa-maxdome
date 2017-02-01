@@ -8,10 +8,15 @@ module.exports = ({ heimdall }) => ['newAssetsByGenre', async ({ request, respon
     .filter('movies')
     .filter('new')
     .filter('notUnlisted')
+    .query('pageSize', 1)
     .sort('activeLicenseStart', 'desc');
   const assets = heimdall.getAssets(query)
   if (assets.length > 0) {
-    new Asset(assets[0]).render(response);
+    const asset = new Asset(assets[0]);
+    response
+      .say(asset.getSay())
+      .display(asset.getDisplay());
+    session.set('assetId', asset.id);
   } else {
     response.say('Keine Inhalte vorhanden');
   }

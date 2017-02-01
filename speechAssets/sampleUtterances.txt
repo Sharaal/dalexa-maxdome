@@ -1,2 +1,3 @@
+descripeLastAsset nach der Beschreibung
 newAssets was es neues gibt
 newAssetsByGenre was es neues an {genre} gibt
