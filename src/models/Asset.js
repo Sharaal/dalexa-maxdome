@@ -4,7 +4,7 @@ class Asset {
     this.data = data;
   }
 
-  getSay(opts) {
+  getSay(opts = {}) {
     const asset = this.data;
 
     let say;
