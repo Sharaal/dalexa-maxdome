@@ -20,9 +20,9 @@ class Asset {
     if (asset.episodeTitle) {
       say += ` - Folge ${asset.episodeTitle}`;
     }
-    say += `, Genre: ${asset.genres.join(', ')}`;
+    say += `, Genre: ${asset.genres.join(', ')}.`;
     if (opts.description) {
-      say += `. ${asset.description}`;
+      say += ` ${asset.description}`;
     }
 
     return say;

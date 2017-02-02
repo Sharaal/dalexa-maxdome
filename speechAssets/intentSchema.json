@@ -16,6 +16,10 @@
           "type": "GENRE"
         }
       ]
+    },
+    {
+      "intent": "tipOfTheDay",
+      "slots": []
     }
   ]
 }

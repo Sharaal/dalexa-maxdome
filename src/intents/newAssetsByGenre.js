@@ -18,6 +18,6 @@ module.exports = ({ heimdall }) => ['newAssetsByGenre', async ({ request, respon
       .display(asset.getDisplay());
     session.set('assetId', asset.id);
   } else {
-    response.say('Keine Inhalte vorhanden');
+    response.say('Keine Inhalte vorhanden.');
   }
 }];
