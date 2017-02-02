@@ -10,6 +10,7 @@ skill.onIntents([
   require('./intents/descripeLastAsset')({ heimdall }),
   require('./intents/newAssets')({ heimdall }),
   require('./intents/newAssetsByGenre')({ heimdall }),
+  require('./intents/tipOfTheDay')({ heimdall }),
 ]);
 
 app.post('/', skill.getExpressHandler());
