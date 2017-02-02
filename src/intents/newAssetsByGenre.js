@@ -10,6 +10,7 @@ module.exports = ({ heimdall }) => ['newAssetsByGenre', async ({ request, respon
     .filter('notUnlisted')
     .query('pageSize', 1)
     .sort('activeLicenseStart', 'desc');
+  console.log(query);
   const assets = heimdall.getAssets(query)
   if (assets.length > 0) {
     const asset = new Asset(assets[0]);
