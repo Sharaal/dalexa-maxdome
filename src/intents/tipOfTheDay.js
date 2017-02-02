@@ -11,6 +11,6 @@ module.exports = ({ heimdall }) => ['tipOfTheDay', async ({ response, session })
       .display(asset.getDisplay());
     session.set('assetId', asset.id);
   } catch (e) {
-    response.say('Kein Tipp des Tages vorhanden.')
+    response.say('Kein Tipp des Tages vorhanden.');
   }
 }];
