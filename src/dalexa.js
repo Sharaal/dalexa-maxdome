@@ -2,13 +2,13 @@ class Session {
   constructor({ application, attributes, sessionId, user }) {
     this.application = application;
     this.attributes = attributes;
-    this.keep = false;
+    this.shouldEndSession = true;
     this.sessionId = sessionId;
     this.user = user;
   }
 
   keep() {
-    this.keep = true;
+    this.shouldEndSession = false;
     return this;
   }
 
@@ -63,10 +63,6 @@ class Request {
 }
 
 class Response {
-  construct() {
-    this.shouldEndSession = true;
-  }
-
   say(plainText) {
     this.outputSpeech = { type: 'PlainText', text: plainText };
     return this;
@@ -136,9 +132,9 @@ class Skill {
       } catch (e) {
         console.log(e);
       }
+      response.shouldEndSession = session.shouldEndSession;
       let sessionAttributes;
-      if (session.keep) {
-        response.shouldEndSession = false;
+      if (!session.shouldEndSession) {
         sessionAttributes = session.attributes;
       }
       res.send({ response, sessionAttributes, version: '1.0' });
