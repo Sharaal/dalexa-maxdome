@@ -11,13 +11,12 @@ module.exports = ({ heimdall }) => ['newAssetsByGenre', async ({ request, respon
     .query('pageSize', 1)
     .sort('activeLicenseStart', 'desc');
   const assets = await heimdall.getAssets(query);
-  if (assets.length > 0) {
-    const asset = new Asset(assets[0]);
-    response
-      .say(asset.getSay())
-      .display(asset.getDisplay());
-    session.set('assetId', asset.id);
-  } else {
+  if (assets.length === 0) {
     response.say('Keine Inhalte vorhanden.');
   }
+  const asset = new Asset(assets[0]);
+  response
+    .say(asset.getSay())
+    .display(asset.getDisplay());
+  session.set('assetId', asset.id);
 }];
