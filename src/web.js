@@ -5,7 +5,7 @@ app.use(require('body-parser').json());
 
 const heimdall = new (require('mxd-heimdall').Heimdall)();
 
-const skill = new (require('dalexa').Skill)();
+const skill = new (require('./dalexa').Skill)();
 skill.onIntents([
   require('./intents/descripeLastAsset')({ heimdall }),
   require('./intents/newAssets')({ heimdall }),
