@@ -15,6 +15,6 @@ module.exports = ({ heimdall }) => ['describe', async ({ response, session }) =>
     return;
   }
   const asset = new Asset(assets[0]);
-  response.say(asset.getSay({ description: true }));
+  response.say(asset.description);
   session.keep();
 }];

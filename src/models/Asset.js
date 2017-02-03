@@ -12,7 +12,7 @@ class Asset {
     this.type = asset.type;
   }
 
-  getSay(opts = {}) {
+  getSay() {
     let say;
     if (this.type === 'movie') {
       say = 'Der Film ';
@@ -27,9 +27,6 @@ class Asset {
       say += ` - Folge ${this.episodeTitle}`;
     }
     say += `, Genre: ${this.genres.join(', ')}.`;
-    if (opts.description) {
-      say += ` ${this.description}`;
-    }
 
     return say;
   }
