@@ -17,8 +17,21 @@ class Session {
     return this;
   }
 
+  setJSON(key, value) {
+    this.set(key, JSON.stringify(value));
+    return this;
+  }
+
   get(key) {
     return this.attributes[key];
+  }
+
+  getJSON(key) {
+    let value = this.get(key);
+    if (value) {
+      value = JSON.parse(value);
+    }
+    return value;
   }
 }
 
@@ -30,7 +43,11 @@ class Intent {
     this.slots = {};
     if (slots) {
       Object.keys(slots).forEach((key) => {
-        this.slots[key] = slots[key].value;
+        if (typeof slots[key] === 'object') {
+          this.slots[key] = slots[key].value;
+        } else {
+          this.slots[key] = slots[key];
+        }
       });
     }
   }
@@ -125,14 +142,14 @@ class Skill {
         LaunchRequest: () => this.launchHandler,
         IntentRequest: () => {
           const name = request.intent.name;
-          let lastIntent = session.get('lastIntent');
+          let lastIntent = session.getJSON('lastIntent');
           if (lastIntent && this.actionHandlers[name]) {
-            return this.actionHandlers[name](this.intentHandlers[lastIntent]);
+            return this.actionHandlers[name](lastIntent);
           }
           if (!this.intentHandlers[name]) {
             throw new Error(`unknown request intent name "${name}"`);
           }
-          session.set('lastIntent', name);
+          session.setJSON('lastIntent', request.intent);
           return this.intentHandlers[name];
         },
         SessionEndedRequest: () => this.sessionEndedHandler,
@@ -142,10 +159,14 @@ class Skill {
       }
       const response = new Response();
       try {
-        let handler = typeHandlers[request.type]();
-        while (handler) {
-          handler = await handler({ context, request, response, session });
-        }
+        let next;
+        do {
+          const handler = typeHandlers[request.type]();
+          next = await handler({ context, request, response, session });
+          if (next) {
+            request.intent = new Intent(next);
+          }
+        } while (next);
       } catch (e) {
         console.log(e);
       }
