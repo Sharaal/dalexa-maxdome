@@ -1,8 +1,4 @@
-const AssetsQuery = require('mxd-heimdall').AssetsQuery;
-
-const Asset = require('../models/Asset');
-
-module.exports = ({ heimdall }) => ['describe', async ({ response, session, startIntent }) => {
+module.exports = ['describe', async ({ response, session, startIntent }) => {
   if (!startIntent) {
     response.say('Der Intent unterstützt keine Pagination.');
     return;
