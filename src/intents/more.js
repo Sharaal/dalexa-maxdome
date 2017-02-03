@@ -7,6 +7,6 @@ module.exports = ({ heimdall }) => ['describe', async ({ response, session, star
     response.say('Der Intent unterstützt keine Pagination.');
     return;
   }
-  session.set('pageStart', (session.get('pageStart') || 0) + 1);
+  session.set('pageStart', (session.get('pageStart') || 1) + 1);
   return startIntent;
 }];

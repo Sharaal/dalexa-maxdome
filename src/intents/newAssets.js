@@ -8,7 +8,7 @@ module.exports = ({ heimdall }) => ['newAssets', async ({ response, session }) =
     .filter('new')
     .filter('notUnlisted')
     .query('pageSize', 1)
-    .query('pageStart', session.get('pageStart'))
+    .query('pageStart', session.get('pageStart') || 1)
     .sort('activeLicenseStart', 'desc');
   const assets = await heimdall.getAssets(query);
   if (assets.length === 0) {
