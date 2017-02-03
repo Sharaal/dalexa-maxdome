@@ -1,49 +1,55 @@
 class Asset {
-  constructor(data) {
-    this.id = data.id;
-    this.data = data;
+  constructor(asset) {
+    this.description = asset.description;
+    this.duration = asset.duration;
+    this.episodeTitle = asset.episodeTitle;
+    this.genres = asset.genres;
+    this.id = asset.id;
+    this.link = asset.link;
+    this.productionYear = asset.productionYear;
+    this.seasonNumber = asset.seasonNumber;
+    this.title = asset.title;
+    this.type = asset.type;
   }
 
   getSay(opts = {}) {
-    const asset = this.data;
-
     let say;
-    if (asset.type === 'movie') {
+    if (this.type === 'movie') {
       say = 'Der Film ';
     } else {
       say = 'Die Serie ';
     }
-    say += asset.title;
-    if (asset.seasonNumber) {
-      say += ` - Staffel ${asset.seasonNumber}`;
+    say += this.title;
+    if (this.seasonNumber) {
+      say += ` - Staffel ${this.seasonNumber}`;
     }
-    if (asset.episodeTitle) {
-      say += ` - Folge ${asset.episodeTitle}`;
+    if (this.episodeTitle) {
+      say += ` - Folge ${this.episodeTitle}`;
     }
-    say += `, Genre: ${asset.genres.join(', ')}.`;
+    say += `, Genre: ${this.genres.join(', ')}.`;
     if (opts.description) {
-      say += ` ${asset.description}`;
+      say += ` ${this.description}`;
     }
 
     return say;
   }
 
   getDisplay() {
-    const asset = this.data;
-
-    let title = asset.title;
-    if (asset.seasonNumber) {
-      title += ` - Staffel ${asset.seasonNumber}`;
+    let title = this.title;
+    if (this.seasonNumber) {
+      title += ` - Staffel ${this.seasonNumber}`;
     }
-    if (asset.episodeTitle) {
-      title += ` - Folge ${asset.episodeTitle}`;
+    if (this.episodeTitle) {
+      title += ` - Folge ${this.episodeTitle}`;
     }
 
     const text = [
-      `${asset.productionYear}, ${asset.duration} Minuten`,
-      `Genres: ${asset.genres.join(', ')}`,
+      `${this.productionYear}, ${this.duration} Minuten`,
+      `Genres: ${this.genres.join(', ')}`,
       '',
-      asset.description,
+      this.description,
+      '',
+      this.link,
     ].join('\n');
 
     return { title, text };

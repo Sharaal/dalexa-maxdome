@@ -1,4 +1,4 @@
 descripeLastAsset nach der Beschreibung
-newAssets was es neues gibt
-newAssetsByGenre was es neues an {genre} gibt
+newAssets was es Neues gibt
+newAssetsByGenre was es Neues an {genre} gibt
 tipOfTheDay nach dem Tipp des Tages

@@ -1,11 +1,11 @@
 class Maxpert {
-  constructor(data) {
-    this.data = data;
+  constructor(maxpert) {
+    this.firstname = maxpert.firstname;
+    this.surname = maxpert.surname;
   }
 
   getSay() {
-    const maxpert = this.data;
-    return `${maxpert.firstname} ${maxpert.surname}`;
+    return `${this.firstname} ${this.surname}`;
   }
 }
 
