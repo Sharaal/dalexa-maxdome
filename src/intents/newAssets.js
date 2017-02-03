@@ -19,6 +19,7 @@ module.exports = ({ heimdall }) => ['newAssets', async ({ response, session }) =
   response
     .say(asset.getSay())
     .display(asset.getDisplay());
-  session.set('startIntent', 'newAssets');
-  session.set('assetId', asset.id);
+  session
+    .keep()
+    .set('assetId', asset.id);
 }];

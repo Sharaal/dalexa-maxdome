@@ -20,9 +20,6 @@
 
 ## Roadmap
 
-* Sessions vereinfachen:
-  * Absplittung von Intents die nur auf Reaktion eines anderen aufgerufen werden können => Actions
-  * dalexa setzt den Namen des zuletzt genutzten Intents in die Session wenn sie nicht beendet ist
 * LinkAccount
 * Smart Home Skill API
 

@@ -20,6 +20,7 @@ module.exports = ({ heimdall }) => ['newAssetsByGenre', async ({ request, respon
   response
     .say(asset.getSay())
     .display(asset.getDisplay());
-  session.set('startIntent', 'newAssetsByGenre');
-  session.set('assetId', asset.id);
+  session
+    .keep()
+    .set('assetId', asset.id);
 }];

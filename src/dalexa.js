@@ -13,7 +13,6 @@ class Session {
   }
 
   set(key, value) {
-    this.keep();
     this.attributes[key] = value;
     return this;
   }
@@ -76,9 +75,22 @@ class Response {
 
 class Skill {
   constructor() {
+    this.actionHandlers = {};
     this.intentHandlers = {};
     this.launchHandler = null;
     this.sessionEndedHandler = null;
+  }
+
+  onAction(name, handler) {
+    this.actionHandlers[name] = handler;
+    return this;
+  }
+
+  onActions(actions) {
+    actions.forEach(([name, handler]) => {
+      this.onAction(name, handler);
+    });
+    return this;
   }
 
   onIntent(name, handler) {
@@ -113,9 +125,14 @@ class Skill {
         LaunchRequest: () => this.launchHandler,
         IntentRequest: () => {
           const name = request.intent.name;
+          let lastIntent = session.get('lastIntent');
+          if (lastIntent && this.actionHandlers[name]) {
+            return this.actionHandlers[name](this.intentHandlers[lastIntent]);
+          }
           if (!this.intentHandlers[name]) {
             throw new Error(`unknown request intent name "${name}"`);
           }
+          session.set('lastIntent', name);
           return this.intentHandlers[name];
         },
         SessionEndedRequest: () => this.sessionEndedHandler,
@@ -125,13 +142,9 @@ class Skill {
       }
       const response = new Response();
       try {
-        let startIntent = session.get('startIntent');
-        if (startIntent) {
-          startIntent = this.intentHandlers[startIntent];
-        }
         let handler = typeHandlers[request.type]();
         while (handler) {
-          handler = await handler({ context, request, response, session, startIntent });
+          handler = await handler({ context, request, response, session });
         }
       } catch (e) {
         console.log(e);
