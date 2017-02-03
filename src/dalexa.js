@@ -1,7 +1,7 @@
 class Session {
   constructor({ application, attributes, sessionId, user }) {
     this.application = application;
-    this.attributes = attributes;
+    this.attributes = attributes || {};
     this.shouldEndSession = true;
     this.sessionId = sessionId;
     this.user = user;
@@ -118,7 +118,6 @@ class Skill {
   getExpressHandler() {
     return async (req, res) => {
       const json = req.body;
-      console.log(json);
       const context = new Context(json.context);
       const request = new Request(json.request);
       const session = new Session(json.session);
