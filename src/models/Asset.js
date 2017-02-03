@@ -45,8 +45,6 @@ class Asset {
       `Genres: ${this.genres.join(', ')}`,
       '',
       this.description,
-      '',
-      this.link,
     ].join('\n');
 
     return { title, text };

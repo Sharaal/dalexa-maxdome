@@ -16,7 +16,8 @@
   * "Beschreibung" Gibt die Beschreibung des letzten Assets aus
   * "Danke" Beendet die Session
 * Pagination, nach einem anderen Skill wartet Alexa auf:
-  * "Weiter" Ruft den letzten Intent nochmal für ein weiteres Asset auf
+  * "Weiter" Ruft den letzten Intent nochmal für ein Asset weiter auf
+  * "Zurück" Ruft den letzten Intent nochmal für ein Asset zurück auf
 
 ## Roadmap
 
@@ -24,5 +25,3 @@
 * Smart Home Skill API
 
 ## Known Questions
-
-* Links in Cards? Wenn ja, dann den Asset link immer dazu
