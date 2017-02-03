@@ -5,6 +5,10 @@
       "slots": []
     },
     {
+      "intent": "more",
+      "slots": []
+    },
+    {
       "intent": "newAssets",
       "slots": []
     },

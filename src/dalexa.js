@@ -125,9 +125,13 @@ class Skill {
       }
       const response = new Response();
       try {
-        const handler = typeHandlers[request.type]();
-        if (handler) {
-          await handler({ context, request, response, session });
+        let startIntent = session.get('startIntent');
+        if (startIntent) {
+          startIntent = this.intentHandlers[startIntent];
+        }
+        let handler = typeHandlers[request.type]();
+        while (handler) {
+          handler = await handler({ context, request, response, session, startIntent });
         }
       } catch (e) {
         console.log(e);

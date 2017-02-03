@@ -15,10 +15,14 @@
 * Session, nach einem anderen Skill wartet Alexa auf:
   * "Beschreibung" Gibt die Beschreibung des letzten Assets aus
   * "Danke" Beendet die Session
+* Pagination, nach einem anderen Skill wartet Alexa auf:
+  * "Weiter" Ruft den letzten Intent nochmal für ein weiteres Asset auf
 
 ## Roadmap
 
-* Pagination
+* Sessions vereinfachen:
+  * Absplittung von Intents die nur auf Reaktion eines anderen aufgerufen werden können => Actions
+  * dalexa setzt den Namen des zuletzt genutzten Intents in die Session wenn sie nicht beendet ist
 * LinkAccount
 * Smart Home Skill API
 

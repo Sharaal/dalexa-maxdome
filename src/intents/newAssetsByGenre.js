@@ -9,6 +9,7 @@ module.exports = ({ heimdall }) => ['newAssetsByGenre', async ({ request, respon
     .filter('new')
     .filter('notUnlisted')
     .query('pageSize', 1)
+    .query('pageStart', session.get('pageStart'))
     .sort('activeLicenseStart', 'desc');
   const assets = await heimdall.getAssets(query);
   if (assets.length === 0) {
@@ -19,5 +20,6 @@ module.exports = ({ heimdall }) => ['newAssetsByGenre', async ({ request, respon
   response
     .say(asset.getSay())
     .display(asset.getDisplay());
+  session.set('startIntent', 'newAssetsByGenre');
   session.set('assetId', asset.id);
 }];
