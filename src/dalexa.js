@@ -145,7 +145,7 @@ class Skill {
       const session = new Session(json.session);
       const typeHandlers = {
         LaunchRequest: () => this.launchHandler,
-        IntentRequest: () => {
+        IntentRequest: (cleanUp) => {
           const name = request.intent.name;
           let lastIntent = session.getJSON('lastIntent');
           if (lastIntent && this.actionHandlers[name]) {
@@ -154,7 +154,9 @@ class Skill {
           if (!this.intentHandlers[name]) {
             throw new Error(`unknown request intent name "${name}"`);
           }
-          session.cleanUp();
+          if (cleanUp) {
+            session.cleanUp();
+          }
           session.setJSON('lastIntent', request.intent);
           return this.intentHandlers[name];
         },
@@ -167,7 +169,7 @@ class Skill {
       try {
         let next;
         do {
-          const handler = typeHandlers[request.type]();
+          const handler = typeHandlers[request.type](!next);
           next = await handler({ context, request, response, session });
           if (next) {
             request.intent = new Intent(next);
