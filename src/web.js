@@ -9,6 +9,7 @@ app.get('/', require('./controllers/tipOfTheDay')({ heimdall }));
 
 const skill = new (require('./dalexa').Skill)();
 skill.onActions([
+  require('./actions/back'),
   require('./actions/describe')({ heimdall }),
   require('./actions/more'),
   require('./actions/thanks'),
