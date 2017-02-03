@@ -133,7 +133,7 @@ class Skill {
       }
       let sessionAttributes;
       if (session.newAttributes) {
-        //response.shouldEndSession = false;
+        // response.shouldEndSession = false;
         sessionAttributes = session.newAttributes;
       }
       res.send({ response, sessionAttributes, version: '1.0' });

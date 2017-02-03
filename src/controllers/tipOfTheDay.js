@@ -1,7 +1,7 @@
 const Asset = require('../models/Asset');
 const Maxpert = require('../models/Maxpert');
 
-module.exports = ({ heimdall }) => ['get', ['/', async (req, res) => {
+module.exports = ({ heimdall }) => async (req, res) => {
   const tipOfTheDay = await heimdall.getTipOfTheDay();
   const asset = new Asset(tipOfTheDay.asset);
   const maxpert = new Maxpert(tipOfTheDay.maxpert);
@@ -12,4 +12,4 @@ module.exports = ({ heimdall }) => ['get', ['/', async (req, res) => {
     mainText: asset.description,
     redirectionUrl: asset.link,
   });
-}]];
+};

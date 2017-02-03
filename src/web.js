@@ -5,9 +5,7 @@ app.use(require('body-parser').json());
 
 const heimdall = new (require('mxd-heimdall').Heimdall)();
 
-require('dcontrollers')(app, [
-  require('./controllers/tipOfTheDay')({ heimdall }),
-]);
+app.get('/', require('./controllers/tipOfTheDay')({ heimdall }));
 
 const skill = new (require('./dalexa').Skill)();
 skill.onIntents([
