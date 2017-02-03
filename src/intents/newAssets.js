@@ -3,12 +3,13 @@ const AssetsQuery = require('mxd-heimdall').AssetsQuery;
 const Asset = require('../models/Asset');
 
 module.exports = ({ heimdall }) => ['newAssets', async ({ response, session }) => {
+  const pageStart = session.get('pageStart') || 1;
   const query = (new AssetsQuery())
     .filter('movies')
     .filter('new')
     .filter('notUnlisted')
     .query('pageSize', 1)
-    .query('pageStart', session.get('pageStart') || 1)
+    .query('pageStart', pageStart)
     .sort('activeLicenseStart', 'desc');
   const assets = await heimdall.getAssets(query);
   if (assets.length === 0) {
@@ -21,5 +22,6 @@ module.exports = ({ heimdall }) => ['newAssets', async ({ response, session }) =
     .display(asset.getDisplay());
   session
     .keep()
-    .set('assetId', asset.id);
+    .set('assetId', asset.id)
+    .set('pageStart', pageStart);
 }];
