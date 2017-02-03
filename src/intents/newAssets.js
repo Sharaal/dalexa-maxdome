@@ -13,7 +13,12 @@ module.exports = ({ heimdall }) => ['newAssets', async ({ response, session }) =
     .sort('activeLicenseStart', 'desc');
   const assets = await heimdall.getAssets(query);
   if (assets.length === 0) {
-    response.say('Keine Inhalte vorhanden.');
+    if (pageStart > 1) {
+      response.say('Keine Inhalte vorhanden.');
+    } else {
+      response.say('Keine weiteren Inhalte vorhanden.');
+      session.keep();
+    }
     return;
   }
   const asset = new Asset(assets[0]);

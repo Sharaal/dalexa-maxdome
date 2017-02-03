@@ -7,6 +7,11 @@ class Session {
     this.user = user;
   }
 
+  cleanUp() {
+    this.attributes = {};
+    return this;
+  }
+
   keep() {
     this.shouldEndSession = false;
     return this;
@@ -149,6 +154,7 @@ class Skill {
           if (!this.intentHandlers[name]) {
             throw new Error(`unknown request intent name "${name}"`);
           }
+          session.cleanUp();
           session.setJSON('lastIntent', request.intent);
           return this.intentHandlers[name];
         },

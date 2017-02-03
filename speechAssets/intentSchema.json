@@ -1,6 +1,10 @@
 {
   "intents": [
     {
+      "intent": "back",
+      "slots": []
+    },
+    {
       "intent": "describe",
       "slots": []
     },
