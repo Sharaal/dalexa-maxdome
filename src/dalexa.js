@@ -13,6 +13,7 @@ class Session {
   }
 
   set(key, value) {
+    this.keep();
     this.attributes[key] = value;
     return this;
   }
