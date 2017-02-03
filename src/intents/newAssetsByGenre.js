@@ -13,6 +13,7 @@ module.exports = ({ heimdall }) => ['newAssetsByGenre', async ({ request, respon
   const assets = await heimdall.getAssets(query);
   if (assets.length === 0) {
     response.say('Keine Inhalte vorhanden.');
+    return;
   }
   const asset = new Asset(assets[0]);
   response
