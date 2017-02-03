@@ -1,4 +1,4 @@
-module.exports = ['describe', async ({ response, session, startIntent }) => {
+module.exports = ['more', async ({ response, session, startIntent }) => {
   if (!startIntent) {
     response.say('Der Intent unterstützt keine Pagination.');
     return;
