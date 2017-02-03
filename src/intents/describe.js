@@ -2,7 +2,8 @@ const AssetsQuery = require('mxd-heimdall').AssetsQuery;
 
 const Asset = require('../models/Asset');
 
-module.exports = ({ heimdall }) => ['descripeLastAsset', async ({ response, session }) => {
+module.exports = ({ heimdall }) => ['describe', async ({ response, session }) => {
+  session.keep();
   const assetId = session.get('assetId');
   if (!assetId) {
     response.say('Es wurde in dieser Session noch kein Asset angefragt.');

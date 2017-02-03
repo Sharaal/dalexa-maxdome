@@ -1,7 +1,7 @@
 {
   "intents": [
     {
-      "intent": "descripeLastAsset",
+      "intent": "describe",
       "slots": []
     },
     {
@@ -16,6 +16,10 @@
           "type": "GENRE"
         }
       ]
+    },
+    {
+      "intent": "thanks",
+      "slots": []
     },
     {
       "intent": "tipOfTheDay",

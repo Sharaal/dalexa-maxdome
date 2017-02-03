@@ -1,4 +1,5 @@
-descripeLastAsset nach der Beschreibung
+describe Beschreibung
 newAssets was es Neues gibt
 newAssetsByGenre was es Neues an {genre} gibt
+thanks Danke
 tipOfTheDay nach dem Tipp des Tages

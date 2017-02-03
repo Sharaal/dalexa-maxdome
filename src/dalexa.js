@@ -1,15 +1,19 @@
 class Session {
-  constructor({ sessionId, application, attributes, user }) {
-    this.sessionId = sessionId;
+  constructor({ application, attributes, sessionId, user }) {
     this.application = application;
     this.attributes = attributes;
-    this.newAttributes = null;
+    this.keep = false;
+    this.sessionId = sessionId;
     this.user = user;
   }
 
+  keep() {
+    this.keep = true;
+    return this;
+  }
+
   set(key, value) {
-    this.newAttributes = this.newAttributes || {};
-    this.newAttributes[key] = value;
+    this.attributes[key] = value;
     return this;
   }
 
@@ -132,9 +136,9 @@ class Skill {
         console.log(e);
       }
       let sessionAttributes;
-      if (session.newAttributes) {
-        // response.shouldEndSession = false;
-        sessionAttributes = session.newAttributes;
+      if (session.keep) {
+        response.shouldEndSession = false;
+        sessionAttributes = session.attributes;
       }
       res.send({ response, sessionAttributes, version: '1.0' });
     };

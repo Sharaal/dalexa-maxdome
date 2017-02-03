@@ -9,9 +9,10 @@ app.get('/', require('./controllers/tipOfTheDay')({ heimdall }));
 
 const skill = new (require('./dalexa').Skill)();
 skill.onIntents([
-  require('./intents/descripeLastAsset')({ heimdall }),
+  require('./intents/describe')({ heimdall }),
   require('./intents/newAssets')({ heimdall }),
   require('./intents/newAssetsByGenre')({ heimdall }),
+  require('./intents/thanks'),
   require('./intents/tipOfTheDay')({ heimdall }),
 ]);
 

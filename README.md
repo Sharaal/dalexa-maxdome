@@ -12,10 +12,12 @@
   * "Alexa, frag maxdome nach dem Tipp des Tages"
 * Slots: 
   * "Alexa, frag maxdome was es Neues an {genre} gibt"
+* Session, nach einem anderen Skill wartet Alexa auf:
+  * "Beschreibung" Gibt die Beschreibung des letzten Assets aus
+  * "Danke" Beendet die Session
 
 ## Roadmap
 
-* Session
 * Pagination
 * LinkAccount
 * Smart Home Skill API
