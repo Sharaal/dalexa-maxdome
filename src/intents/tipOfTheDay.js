@@ -8,7 +8,6 @@ module.exports = ({ heimdall }) => ['tipOfTheDay', async ({ response, session })
   response
     .say(`Der Tipp des Tages von ${maxpert.getSay()}: ${asset.getSay()}`)
     .display(asset.getDisplay());
-  session
-    .keep()
-    .set('assetId', asset.id);
+  session.shouldEndSession = false;
+  session.set('assetId', asset.id);
 }];

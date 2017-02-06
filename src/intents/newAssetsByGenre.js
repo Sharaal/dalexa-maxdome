@@ -18,7 +18,8 @@ module.exports = ({ heimdall }) => ['newAssetsByGenre', async ({ request, respon
       response.say('Keine Inhalte vorhanden.');
     } else {
       response.say('Keine weiteren Inhalte vorhanden.');
-      session.keep();
+      session.shouldEndSession = false;
+      session.set('pageStart', pageStart - 1);
     }
     return;
   }
@@ -26,8 +27,8 @@ module.exports = ({ heimdall }) => ['newAssetsByGenre', async ({ request, respon
   response
     .say(asset.getSay())
     .display(asset.getDisplay());
+  session.shouldEndSession = false;
   session
-    .keep()
     .set('assetId', asset.id)
     .set('pageStart', pageStart);
 }];

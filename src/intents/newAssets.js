@@ -17,7 +17,7 @@ module.exports = ({ heimdall }) => ['newAssets', async ({ response, session }) =
       response.say('Keine Inhalte vorhanden.');
     } else {
       response.say('Keine weiteren Inhalte vorhanden.');
-      session.keep();
+      session.shouldEndSession = false;
     }
     return;
   }
@@ -25,8 +25,8 @@ module.exports = ({ heimdall }) => ['newAssets', async ({ response, session }) =
   response
     .say(asset.getSay())
     .display(asset.getDisplay());
+  session.shouldEndSession = false;
   session
-    .keep()
     .set('assetId', asset.id)
     .set('pageStart', pageStart);
 }];

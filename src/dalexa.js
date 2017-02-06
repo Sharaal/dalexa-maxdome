@@ -12,11 +12,6 @@ class Session {
     return this;
   }
 
-  keep() {
-    this.shouldEndSession = false;
-    return this;
-  }
-
   set(key, value) {
     this.attributes[key] = value;
     return this;
