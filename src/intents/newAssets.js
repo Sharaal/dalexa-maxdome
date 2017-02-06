@@ -18,6 +18,7 @@ module.exports = ({ heimdall }) => ['newAssets', async ({ response, session }) =
     } else {
       response.say('Keine weiteren Inhalte vorhanden.');
       session.shouldEndSession = false;
+      session.set('pageStart', pageStart - 1);
     }
     return;
   }
