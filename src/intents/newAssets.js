@@ -2,7 +2,7 @@ const AssetsQuery = require('mxd-heimdall').AssetsQuery;
 
 const Asset = require('../models/Asset');
 
-module.exports = ({ heimdall }) => ['newAssets', async ({ response, session }) => {
+module.exports = ({ heimdall }) => ['newAssets', async ({ request, response, session }) => {
   const pageStart = session.get('pageStart') || 1;
   const query = (new AssetsQuery())
     .filter('movies')
@@ -11,6 +11,10 @@ module.exports = ({ heimdall }) => ['newAssets', async ({ response, session }) =
     .query('pageSize', 1)
     .query('pageStart', pageStart)
     .sort('activeLicenseStart', 'desc');
+  const areaRestriction = await request.settings('areaRestriction');
+  if (areaRestriction) {
+    query.filter(areaRestriction);
+  }
   const assets = await heimdall.getAssets(query);
   if (assets.length === 0) {
     if (pageStart > 1) {

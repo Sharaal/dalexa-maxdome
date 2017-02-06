@@ -95,7 +95,12 @@ class Skill {
     this.actionHandlers = {};
     this.intentHandlers = {};
     this.launchHandler = null;
+    this.middlewares = [];
     this.sessionEndedHandler = null;
+  }
+
+  use(middleware) {
+    this.middlewares.push(middleware);
   }
 
   onAction(name, handler) {
@@ -162,10 +167,14 @@ class Skill {
       }
       const response = new Response();
       try {
+        const args = { context, request, response, session };
+        this.middlewares.forEach(async middleware => {
+          await middleware(args);
+        });
         let next;
         do {
           const handler = typeHandlers[request.type](!next);
-          next = await handler({ context, request, response, session });
+          next = await handler(args);
           if (next) {
             request.intent = new Intent(next);
           }

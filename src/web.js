@@ -7,7 +7,10 @@ const heimdall = new (require('mxd-heimdall').Heimdall)();
 
 app.get('/', require('./controllers/tipOfTheDay')({ heimdall }));
 
+const redis = require('dredis')(process.env.REDIS_URL);
+
 const skill = new (require('./dalexa').Skill)();
+skill.use(require('./middlewares/settings')({ redis }));
 skill.onActions([
   require('./actions/back'),
   require('./actions/describe')({ heimdall }),
@@ -15,8 +18,10 @@ skill.onActions([
   require('./actions/thanks'),
 ]);
 skill.onIntents([
+  require('./intents/allAreas'),
   require('./intents/newAssets')({ heimdall }),
   require('./intents/newAssetsByGenre')({ heimdall }),
+  require('./intents/restrictArea'),
   require('./intents/tipOfTheDay')({ heimdall }),
 ]);
 

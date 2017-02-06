@@ -12,6 +12,10 @@ module.exports = ({ heimdall }) => ['newAssetsByGenre', async ({ request, respon
     .query('pageSize', 1)
     .query('pageStart', pageStart)
     .sort('activeLicenseStart', 'desc');
+  const areaRestriction = await request.settings('areaRestriction');
+  if (areaRestriction) {
+    query.filter(areaRestriction);
+  }
   const assets = await heimdall.getAssets(query);
   if (assets.length === 0) {
     if (pageStart > 1) {

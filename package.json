@@ -30,7 +30,8 @@
     "dalexa": "^1.0.1",
     "dexpress": "^2.0.0",
     "dotenv": "^4.0.0",
-    "mxd-heimdall": "^3.2.0"
+    "dredis": "^2.0.0",
+    "mxd-heimdall": "^3.3.0"
   },
   "devDependencies": {
     "eslint": "^3.13.1",

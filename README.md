@@ -18,6 +18,9 @@
 * Pagination, nach einem anderen Skill wartet Alexa auf:
   * "Weiter" Ruft den letzten Intent nochmal für ein Asset weiter auf
   * "Zurück" Ruft den letzten Intent nochmal für ein Asset zurück auf
+* UserID benutzen um Benutzerspezifische Daten über Sessions hinweg zu speichern:
+  * "Alexa, sag maxdome mich interessiert nur der {area} Bereich"
+  * "Alexa, sag maxdome mich interessieren alle Bereiche"
 
 ## Roadmap
 

@@ -1,6 +1,10 @@
 {
   "intents": [
     {
+      "intent": "allAreas",
+      "slots": []
+    },
+    {
       "intent": "back",
       "slots": []
     },
@@ -22,6 +26,15 @@
         {
           "name": "genre",
           "type": "GENRE"
+        }
+      ]
+    },
+    {
+      "intent": "restrictArea",
+      "slots": [
+        {
+          "name": "area",
+          "type": "AREA"
         }
       ]
     },
