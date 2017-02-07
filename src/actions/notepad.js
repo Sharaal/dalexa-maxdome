@@ -6,7 +6,6 @@ module.exports = ({ heimdall }) => ['notepad', (lastIntent) => async ({ request,
     return;
   }
   const linkedAccount = await request.linkedAccount();
-  console.log(linkedAccount);
   if (!linkedAccount) {
     response
       .say('Das Alexa Konto muss zuerst mit einem maxdome Benutzer verknüpft werden')
