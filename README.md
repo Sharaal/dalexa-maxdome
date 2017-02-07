@@ -26,5 +26,3 @@
 
 * LinkAccount
 * Smart Home Skill API
-
-## Known Questions
