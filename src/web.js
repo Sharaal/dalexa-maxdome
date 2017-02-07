@@ -21,6 +21,7 @@ skill.onActions([
   require('./actions/back'),
   require('./actions/describe')({ heimdall }),
   require('./actions/more'),
+  require('./actions/notepad')({ heimdall }),
   require('./actions/thanks'),
 ]);
 skill.onIntents([

@@ -21,7 +21,8 @@
 * UserID benutzen um Benutzerspezifische Daten über Sessions hinweg zu speichern:
   * "Alexa, sag maxdome mich interessiert nur der {area} Bereich"
   * "Alexa, sag maxdome mich interessieren alle Bereiche"
-* LinkAccount
+* LinkAccount, das Alexa Konto kann mit einem maxdome Benutzer verknüpft werden, nach einem anderen Skill wartet Alexa auf:
+  * "Zum Merkzettel hinzufügen" um den Inhalt zum Merkzettel hinzuzufügen
 
 ## Roadmap
 

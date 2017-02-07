@@ -30,6 +30,10 @@
       ]
     },
     {
+      "intent": "notepad",
+      "slots": []
+    },
+    {
       "intent": "restrictArea",
       "slots": [
         {
