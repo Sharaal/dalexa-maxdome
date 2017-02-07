@@ -12,6 +12,7 @@ module.exports = ({ heimdall }) => ['notepad', (lastIntent) => async ({ request,
       .linkAccount();
     return;
   }
+  console.log(linkedAccount);
   await heimdall.post(`mxd/notepad/${linkedAccount.customer.customerId}`, {
     body: { contentId: assetId },
     headers: { 'mxd-session': linkedAccount.sessionId },
