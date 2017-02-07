@@ -5,14 +5,13 @@ module.exports = ({ heimdall }) => ['notepad', (lastIntent) => async ({ request,
     response.say('Es wurde in dieser Session noch kein Asset angefragt.');
     return;
   }
-  const linkedAccount = request.linkedAccount();
+  const linkedAccount = await request.linkedAccount();
   if (!linkedAccount) {
     response
       .say('Das Alexa Konto muss zuerst mit einem maxdome Benutzer verknüpft werden')
       .linkAccount();
     return;
   }
-  console.log(linkedAccount);
   await heimdall.post(`mxd/notepad/${linkedAccount.customer.customerId}`, {
     body: { contentId: assetId },
     headers: { 'mxd-session': linkedAccount.sessionId },
