@@ -86,15 +86,16 @@
           if (!search.redirect_uri || !search.state) {
             return;
           }
-          const location = URI(search.redirect_uri)
+          const hash = URI('')
             .search({
               state: search.state,
               access_token: data.token,
               token_type: 'Bearer'
             })
-            .toString();
+            .query();
+          const location = URI(search.redirect_uri).hash(hash).toString();
           $('#location').text(location);
-          //window.location = location;
+          window.location = location;
         }
       );
       return false;
