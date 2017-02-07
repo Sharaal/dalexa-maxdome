@@ -145,6 +145,7 @@ class Skill {
   getExpressHandler() {
     return async (req, res) => {
       const json = req.body;
+      console.log(json);
       const context = new Context(json.context);
       const request = new Request(json.request);
       const session = new Session(json.session);
