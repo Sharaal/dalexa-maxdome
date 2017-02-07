@@ -1,8 +1,9 @@
 module.exports = ({ redis }) => async ({ request, session }) => {
-  request.settings = async (key, value) => {
+  request.settings = async (setting, value) => {
+    const key = `SETTINGS:${session.user.userId}:${setting}`;
     return new Promise((resolve, reject) => {
       if (value === undefined) {
-        redis.get(`SETTINGS:${session.user.userId}:${key}`, (err, value) => {
+        redis.get(key, (err, value) => {
           if (err) {
             reject(err);
           } else {
@@ -11,7 +12,7 @@ module.exports = ({ redis }) => async ({ request, session }) => {
         });
       } else {
         if (value === null) {
-          redis.del(`SETTINGS:${session.user.userId}:${key}`, (err) => {
+          redis.del(key, (err) => {
             if (err) {
               reject(err);
             } else {
@@ -19,7 +20,7 @@ module.exports = ({ redis }) => async ({ request, session }) => {
             }
           });
         } else {
-          redis.set(`SETTINGS:${session.user.userId}:${key}`, value, (err) => {
+          redis.set(key, value, (err) => {
             if (err) {
               reject(err);
             } else {
