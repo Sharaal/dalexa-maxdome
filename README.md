@@ -21,8 +21,7 @@
 * UserID benutzen um Benutzerspezifische Daten über Sessions hinweg zu speichern:
   * "Alexa, sag maxdome mich interessiert nur der {area} Bereich"
   * "Alexa, sag maxdome mich interessieren alle Bereiche"
-* LinkAccount:
-  * "Alexa, frag maxdome nach einer Account Verlinkung"
+* LinkAccount
 
 ## Roadmap
 
