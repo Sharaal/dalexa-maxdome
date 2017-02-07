@@ -22,7 +22,7 @@
   * "Alexa, sag maxdome mich interessiert nur der {area} Bereich"
   * "Alexa, sag maxdome mich interessieren alle Bereiche"
 * LinkAccount, das Alexa Konto kann mit einem maxdome Benutzer verknüpft werden, nach einem anderen Skill wartet Alexa auf:
-  * "Zum Merkzettel hinzufügen" um den Inhalt zum Merkzettel hinzuzufügen
+  * "Zum Merkzettel hinzufügen" um das Asset zum Merkzettel hinzuzufügen
 
 ## Roadmap
 
