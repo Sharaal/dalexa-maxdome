@@ -13,10 +13,6 @@
       "slots": []
     },
     {
-      "intent": "linkAccount",
-      "slots": []
-    },
-    {
       "intent": "more",
       "slots": []
     },

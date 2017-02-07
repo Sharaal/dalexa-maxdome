@@ -1,7 +1,6 @@
 allAreas mich interessieren alle Bereiche
 back Zurück
 describe Beschreibung
-linkAccount nach einer Account Verlinkung
 more Weiter
 newAssets was es Neues gibt
 newAssetsByGenre was es Neues an {genre} gibt

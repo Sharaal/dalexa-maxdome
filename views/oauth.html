@@ -63,9 +63,6 @@
     <input type="password" id="inputPassword" class="form-control" placeholder="Passwort" required>
     <button class="btn btn-lg btn-primary btn-block" type="submit" id="btnLogin">Login</button>
   </form>
-  <p>redirect_uri: <span id="redirect_uri"></span></p>
-  <p>state: <span id="state"></span></p>
-  <p>location: <span id="location"></span></p>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
@@ -74,9 +71,6 @@
 
 <script>
   $(function () {
-    const search = URI().search(true);
-    $('#redirect_uri').text(search.redirect_uri);
-    $('#state').text(search.state);
     $('#btnLogin').click(function () {
       $.post(
         '/oauth',
@@ -94,7 +88,6 @@
             })
             .query();
           const location = URI(search.redirect_uri).hash(hash).toString();
-          $('#location').text(location);
           window.location = location;
         }
       );
