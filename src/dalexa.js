@@ -88,6 +88,11 @@ class Response {
     this.card = { type: 'Standard', title, text, image };
     return this;
   }
+
+  linkAccount() {
+    this.card = { type: 'LinkAccount' };
+    return this;
+  }
 }
 
 class Skill {
