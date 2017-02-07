@@ -1,15 +1,21 @@
 require('dotenv').config({ silent: true });
 
 const app = require('dexpress').app;
-app.use(require('body-parser').json());
 
 const heimdall = new (require('mxd-heimdall').Heimdall)();
-
-app.get('/', require('./controllers/tipOfTheDay')({ heimdall }));
-
 const redis = require('dredis')(process.env.REDIS_URL);
 
+require('dcontrollers')(
+  app,
+  [
+    require('./controllers/tipOfTheDay')({ heimdall }),
+  ].concat(
+    require('./controllers/oauth')({ heimdall, redis }),
+  )
+);
+
 const skill = new (require('./dalexa').Skill)();
+skill.use(require('./middlewares/linkedAccount')({ heimdall, redis }));
 skill.use(require('./middlewares/settings')({ redis }));
 skill.onActions([
   require('./actions/back'),
@@ -25,4 +31,4 @@ skill.onIntents([
   require('./intents/tipOfTheDay')({ heimdall }),
 ]);
 
-app.post('/', skill.getExpressHandler());
+app.post('/', require('body-parser').json(), skill.getExpressHandler());
