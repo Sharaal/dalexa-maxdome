@@ -9,17 +9,23 @@ module.exports = ({ heimdall, redis }) => async ({ request, session }) => {
         if (err) {
           reject(err);
         } else {
+          console.log('A');
+          console.log(linkedAccount);
           (async () => {
             try {
+              console.log('B');
               await heimdall.post('/auth/keepalive', {
                 headers: { 'mxd-session': linkedAccount.sessionId },
               });
-              return resolve(linkedAccount);
+              console.log('C');
+              resolve(linkedAccount);
             } catch (e1) {
               try {
+                console.log('D');
                 const data = await heimdall.post('autologin_portal', {
                   body: { autoLoginPin: linkedAccount.autoLoginPin },
                 });
+                console.log('E');
                 const newLinkedAccount = {
                   autoLoginPin: data.autoLoginPin,
                   customer: { customerId: data.customer.customerId },
@@ -43,7 +49,6 @@ module.exports = ({ heimdall, redis }) => async ({ request, session }) => {
               }
             }
           })();
-          resolve(linkedAccount);
         }
       });
     });
