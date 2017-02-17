@@ -2,22 +2,24 @@ const shortid = require('shortid');
 
 const route = '/oauth';
 
-module.exports = ({ heimdall, redis }) => [
+module.exports = ({ maxdome, redis }) => [
   ['get', [route, async (req, res) => {
-    res.sendFile('oauth.html', { root: __dirname + '/../../views/' });
+    res.sendFile('oauth.html', { root: `${__dirname}/../../views/` });
   }]],
   ['post', [
     route,
     require('body-parser').urlencoded({ extended: false }),
     async (req, res) => {
       try {
-        const data = await heimdall.post('auth/login', {
-          body: {
-            userId: req.body.email,
-            phrase: req.body.password,
-            autoLogin: true
-          },
-        });
+        const data =
+          await maxdome.request()
+            .post('v1/auth/login', {
+              body: {
+                userId: req.body.email,
+                phrase: req.body.password,
+                autoLogin: true,
+              },
+            });
         const token = shortid.generate();
         const linkedAccount = {
           autoLoginPin: data.autoLoginPin,
@@ -37,6 +39,6 @@ module.exports = ({ heimdall, redis }) => [
       } catch (e) {
         res.status(403).send();
       }
-    }
+    },
   ]],
 ];

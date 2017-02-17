@@ -1,33 +1,31 @@
 module.exports = ({ redis }) => async ({ request, session }) => {
-  request.settings = async (setting, value) => {
+  request.settings = async (setting, value1) => {
     const key = `SETTINGS:${session.user.userId}:${setting}`;
     return new Promise((resolve, reject) => {
-      if (value === undefined) {
-        redis.get(key, (err, value) => {
+      if (value1 === undefined) {
+        redis.get(key, (err, value2) => {
           if (err) {
             reject(err);
           } else {
-            resolve(value);
+            resolve(value2);
+          }
+        });
+      } else if (value1 === null) {
+        redis.del(key, (err) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve();
           }
         });
       } else {
-        if (value === null) {
-          redis.del(key, (err) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve();
-            }
-          });
-        } else {
-          redis.set(key, value, (err) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve();
-            }
-          });
-        }
+        redis.set(key, value1, (err) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve();
+          }
+        });
       }
     });
   };

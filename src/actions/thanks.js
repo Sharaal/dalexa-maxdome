@@ -1,3 +1,3 @@
-module.exports = ['thanks', (lastIntent) => async ({ response }) => {
+module.exports = ['thanks', () => async ({ response }) => {
   response.say('Gern geschehen.');
 }];

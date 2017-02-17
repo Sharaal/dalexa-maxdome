@@ -1,41 +1,44 @@
-module.exports = ({ heimdall, redis }) => async ({ request, session }) => {
+const SessionOptions = require('drequest-maxdome').SessionOptions;
+
+module.exports = ({ maxdome, redis }) => async ({ request, session }) => {
   request.linkedAccount = async () => {
     const token = session.user.accessToken;
     if (!token) {
       return;
     }
     return new Promise((resolve, reject) => {
-      redis.getJSON(`LINKEDACCOUNT:${token}`, (err, linkedAccount) => {
-        if (err) {
-          reject(err);
+      redis.getJSON(`LINKEDACCOUNT:${token}`, (err1, linkedAccount) => {
+        if (err1) {
+          reject(err1);
         } else {
           (async () => {
             try {
-              await heimdall.post('/auth/keepalive', {
-                headers: { 'mxd-session': linkedAccount.sessionId },
-              });
+              await maxdome.request()
+                .addOptions(new SessionOptions(linkedAccount))
+                .post(`v1/auth/keepalive`);
               resolve(linkedAccount);
             } catch (e1) {
               try {
-                const data = await heimdall.post('autologin_portal', {
-                  body: { autoLoginPin: linkedAccount.autoLoginPin },
-                });
+                const data = await maxdome.request()
+                  .post(`v1/autologin_portal`, {
+                    body: { autoLoginPin: linkedAccount.autoLoginPin },
+                  });
                 const newLinkedAccount = {
                   autoLoginPin: data.autoLoginPin,
                   customer: { customerId: data.customer.customerId },
                   sessionId: data.sessionId,
                 };
-                redis.setJSON(`LINKEDACCOUNT:${token}`, newLinkedAccount, (err) => {
-                  if (err) {
-                    reject(err);
+                redis.setJSON(`LINKEDACCOUNT:${token}`, newLinkedAccount, (err2) => {
+                  if (err2) {
+                    reject(err2);
                   } else {
                     resolve(newLinkedAccount);
                   }
                 });
               } catch (e2) {
-                redis.del(`LINKEDACCOUNT:${token}`, (err) => {
-                  if (err) {
-                    reject(err);
+                redis.del(`LINKEDACCOUNT:${token}`, (err2) => {
+                  if (err2) {
+                    reject(err2);
                   } else {
                     resolve();
                   }

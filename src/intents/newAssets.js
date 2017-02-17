@@ -1,21 +1,22 @@
-const AssetsQuery = require('mxd-heimdall').AssetsQuery;
-
+const AssetsQueryOptions = require('drequest-maxdome').AssetsQueryOptions;
 const Asset = require('../models/Asset');
 
-module.exports = ({ heimdall }) => ['newAssets', async ({ request, response, session }) => {
+module.exports = ({ maxdome }) => ['newAssets', async ({ request, response, session }) => {
   const pageStart = session.get('pageStart') || 1;
-  const query = (new AssetsQuery())
-    .filter('movies')
-    .filter('new')
-    .filter('notUnlisted')
-    .query('pageSize', 1)
-    .query('pageStart', pageStart)
-    .sort('activeLicenseStart', 'desc');
+  const assetsQueryOptions = new AssetsQueryOptions()
+    .addFilter('movies')
+    .addFilter('new')
+    .addFilter('notUnlisted')
+    .addQuery('pageSize', 1)
+    .addQuery('pageStart', pageStart)
+    .addSort('activeLicenseStart', 'desc');
   const areaRestriction = await request.settings('areaRestriction');
   if (areaRestriction) {
-    query.filter(areaRestriction);
+    assetsQueryOptions.addFilter(areaRestriction);
   }
-  const assets = await heimdall.getAssets(query);
+  const assets =
+    await maxdome.request('assets')
+      .send(assetsQueryOptions);
   if (assets.length === 0) {
     if (pageStart > 1) {
       response.say('Keine Inhalte vorhanden.');

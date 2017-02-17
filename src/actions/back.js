@@ -1,4 +1,4 @@
-module.exports = ['back', (lastIntent) => async ({ response, session }) => {
+module.exports = ['back', lastIntent => async ({ response, session }) => {
   session.shouldEndSession = false;
   const pageStart = session.get('pageStart');
   if (!pageStart) {

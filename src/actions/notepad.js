@@ -1,4 +1,6 @@
-module.exports = ({ heimdall }) => ['notepad', (lastIntent) => async ({ request, response, session }) => {
+const SessionOptions = require('drequest-maxdome').SessionOptions;
+
+module.exports = ({ maxdome }) => ['notepad', () => async ({ request, response, session }) => {
   session.shouldEndSession = false;
   const assetId = session.get('assetId');
   if (!assetId) {
@@ -12,9 +14,10 @@ module.exports = ({ heimdall }) => ['notepad', (lastIntent) => async ({ request,
       .linkAccount();
     return;
   }
-  await heimdall.post(`mxd/notepad/${linkedAccount.customer.customerId}`, {
-    body: { contentId: assetId },
-    headers: { 'mxd-session': linkedAccount.sessionId },
-  });
+  await maxdome.request()
+    .addOptions(new SessionOptions(linkedAccount))
+    .post(`v1/mxd/notepad/%customerId%`, {
+      body: { contentId: assetId }
+    });
   response.say('Inhalt wurde zum Merkzettel hinzugefügt.');
 }];

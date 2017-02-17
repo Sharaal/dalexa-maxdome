@@ -1,8 +1,8 @@
 const Asset = require('../models/Asset');
 const Maxpert = require('../models/Maxpert');
 
-module.exports = ({ heimdall }) => ['tipOfTheDay', async ({ request, response, session }) => {
-  const tipOfTheDay = await heimdall.getTipOfTheDay();
+module.exports = ({ tipOfTheDay }) => ['tipOfTheDay', async ({ request, response, session }) => {
+  const tipOfTheDay = await getTipOfTheDay();
   const asset = new Asset(tipOfTheDay.asset);
   const maxpert = new Maxpert(tipOfTheDay.maxpert);
   const areaRestriction = await request.settings('areaRestriction');
