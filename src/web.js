@@ -14,7 +14,7 @@ require('dcontrollers')(
   )
 );
 
-const skill = new (require('./dalexa').Skill)();
+const skill = new (require('dalexa').Skill)();
 skill.use(require('./middlewares/linkedAccount')({ heimdall, redis }));
 skill.use(require('./middlewares/settings')({ redis }));
 skill.onActions([
