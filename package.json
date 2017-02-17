@@ -32,7 +32,8 @@
     "dexpress": "^2.0.0",
     "dotenv": "^4.0.0",
     "dredis": "^2.0.0",
-    "drequest-maxdome": "^1.1.0",
+    "drequest": "^1.1.0",
+    "drequest-maxdome": "^1.1.1",
     "mxd-heimdall": "^3.3.0",
     "shortid": "^2.2.6"
   },
