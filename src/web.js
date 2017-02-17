@@ -2,7 +2,17 @@ require('dotenv').config({ silent: true });
 
 const app = require('dexpress').app;
 
+const RequestBuilder = require('drequest').RequestBuilder;
+const { AssetsOptions, MaxdomeOptions } = require('drequest-maxdome');
+
+const maxdome =
+  new RequestBuilder()
+    .options('maxdome', new MaxdomeOptions())
+    .names('maxdome')
+    .options('assets', new AssetsOptions());
+
 const heimdall = new (require('mxd-heimdall').Heimdall)();
+
 const redis = require('dredis')(process.env.REDIS_URL);
 
 require('dcontrollers')(app, [
