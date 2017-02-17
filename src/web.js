@@ -5,14 +5,10 @@ const app = require('dexpress').app;
 const heimdall = new (require('mxd-heimdall').Heimdall)();
 const redis = require('dredis')(process.env.REDIS_URL);
 
-require('dcontrollers')(
-  app,
-  [
-    require('./controllers/tipOfTheDay')({ heimdall }),
-  ].concat(
-    require('./controllers/oauth')({ heimdall, redis }),
-  )
-);
+require('dcontrollers')(app, [
+  require('./controllers/tipOfTheDay')({ heimdall }),
+  require('./controllers/oauth')({ heimdall, redis }),
+]);
 
 const skill = new (require('dalexa').Skill)();
 skill.use(require('./middlewares/linkedAccount')({ heimdall, redis }));
