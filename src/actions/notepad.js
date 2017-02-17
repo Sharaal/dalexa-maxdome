@@ -15,9 +15,12 @@ module.exports = ({ maxdome }) => ['notepad', () => async ({ request, response, 
     return;
   }
   await maxdome.request()
-    .addOptions(new SessionOptions(linkedAccount))
-    .post(`v1/mxd/notepad/%customerId%`, {
-      body: { contentId: assetId }
-    });
+    .addOptions()
+    .post(`v1/mxd/notepad/%customerId%`, [
+      {
+        body: { contentId: assetId }
+      },
+      new SessionOptions(linkedAccount)
+    ]);
   response.say('Inhalt wurde zum Merkzettel hinzugefügt.');
 }];

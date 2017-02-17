@@ -14,8 +14,7 @@ module.exports = ({ maxdome, redis }) => async ({ request, session }) => {
           (async () => {
             try {
               await maxdome.request()
-                .addOptions(new SessionOptions(linkedAccount))
-                .post(`v1/auth/keepalive`);
+                .post(`v1/auth/keepalive`, new SessionOptions(linkedAccount));
               resolve(linkedAccount);
             } catch (e1) {
               try {

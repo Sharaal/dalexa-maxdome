@@ -32,7 +32,7 @@
     "dexpress": "^2.0.0",
     "dotenv": "^4.0.0",
     "dredis": "^2.0.0",
-    "drequest": "^2.0.1",
+    "drequest": "^2.0.2",
     "drequest-maxdome": "^2.0.1",
     "shortid": "^2.2.6"
   },
