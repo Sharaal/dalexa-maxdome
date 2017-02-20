@@ -6,5 +6,6 @@ newAssets was es Neues gibt
 newAssetsByGenre was es Neues an {genre} gibt
 restrictArea mich interessiert nur der {area} Bereich
 notepad Zum Merkzettel hinzufügen
+searchAssets nach {name}
 thanks Danke
 tipOfTheDay nach dem Tipp des Tages

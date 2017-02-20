@@ -5,7 +5,7 @@ module.exports = ({ maxdome }) => ['newAssetsByGenre', async ({ request, respons
   const pageStart = session.get('pageStart') || 1;
   const assetsQueryOptions = new AssetsQueryOptions()
     .addFilter('genre', request.get('genre'))
-    .addFilter('movies')
+    .addFilter('contentTypeSeriesOrMovies')
     .addFilter('new')
     .addFilter('notUnlisted')
     .addQuery('pageSize', 1)

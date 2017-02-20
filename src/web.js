@@ -34,6 +34,7 @@ skill.onIntents([
   require('./intents/newAssets')({ maxdome }),
   require('./intents/newAssetsByGenre')({ maxdome }),
   require('./intents/restrictArea'),
+  require('./intents/searchAssets')({ maxdome }),
   require('./intents/tipOfTheDay')({ tipOfTheDay }),
 ]);
 

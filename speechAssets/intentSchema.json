@@ -43,6 +43,15 @@
       ]
     },
     {
+      "intent": "searchAssets",
+      "slots": [
+        {
+          "name": "name",
+          "type": "NAME"
+        }
+      ]
+    },
+    {
       "intent": "thanks",
       "slots": []
     },

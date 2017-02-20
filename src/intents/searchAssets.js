@@ -1,19 +1,13 @@
 const AssetsQueryOptions = require('drequest-maxdome').AssetsQueryOptions;
 const Asset = require('../models/Asset');
 
-module.exports = ({ maxdome }) => ['newAssets', async ({ request, response, session }) => {
+module.exports = ({ maxdome }) => ['searchAssets', async ({ request, response, session }) => {
   const pageStart = session.get('pageStart') || 1;
   const assetsQueryOptions = new AssetsQueryOptions()
     .addFilter('contentTypeSeriesOrMovies')
-    .addFilter('new')
-    .addFilter('notUnlisted')
+    .addFilter('search', request.get('name'))
     .addQuery('pageSize', 1)
-    .addQuery('pageStart', pageStart)
-    .addSort('activeLicenseStart', 'desc');
-  const areaRestriction = await request.settings('areaRestriction');
-  if (areaRestriction) {
-    assetsQueryOptions.addFilter(areaRestriction);
-  }
+    .addQuery('pageStart', pageStart);
   const assets =
     await maxdome.request('assets')
       .send(assetsQueryOptions);
